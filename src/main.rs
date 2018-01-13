@@ -1,9 +1,13 @@
 extern crate clap;
 extern crate colored;
+extern crate git2;
+
 
 use clap::{Arg, App, SubCommand, ArgMatches};
 use colored::*;
+use git2::Repository;
 
+mod git;
 
 fn parse_args() -> ArgMatches <'static> {
     let matches = App::new("Cabinet")
@@ -39,17 +43,29 @@ fn parse_args() -> ArgMatches <'static> {
 
 
 fn main() {
-    println!("{} - {}", "Cabinet".yellow().bold(), "The Ultimate Tool Box".blue().bold());
-    println!("written by {} with {}.", "Lucas Jin".white().bold(), "Rust".red().bold());
-    println!("{} welcome folk and star!", "https://github.com/jinfagang/cabinet".white().italic());
+    println!("{} - {}", "Cabinet".yellow().bold(), "The Ultimate Tool Box".yellow().bold());
+    println!("written by {} with {}.", "Lucas Jin".green().bold(), "Rust".red().bold());
+    println!("{} welcome folk and star!", "https://github.com/jinfagang/cabinet".green().italic());
 
     let matches = parse_args();
 
     if matches.is_present("git") {
-        println!("use {} module", "git".yellow().bold());
+        println!("using {} module", "git".yellow().bold());
+
+        let _repo = match Repository::open("./") {
+            Ok(repo) => {
+                println!("{:?}", repo.namespace());
+            },
+            Err(e) => {
+                panic!("failed to open: {}", e)
+            },
+        };
+
+        git::push_to_remote();
+
     } else if matches.is_present("blog") {
-        println!("use {} module", "blog".yellow().bold());
+        println!("using {} module", "blog".yellow().bold());
     } else if matches.is_present("code") {
-        println!("use {} module", "code".yellow().bold());
+        println!("using {} module", "code".yellow().bold());
     }
 }
