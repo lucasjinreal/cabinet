@@ -11,14 +11,30 @@ This my cabinet tool box. It implement in *Rust*, and do many helper things for 
 **cabinet** is an ultimate tool for me to accelerate my daily work. It's fast written in rust!
 
 
+# Install
+
+To install **cabinet**, you should install *rust* first. Then you can build it by:
+    
+```
+cargo install
+sudo cp ~/.cargo/bin /usr/local/bin
+```
+Or, you can directly using:
+
+```
+./install_carbinet.sh
+```
+To automatically install built binary carbinet according to your system.
+
+
 # Usage
 
 **cabinet** do many things in my daily work. You can using it like this:
     
 ```
 // this command will upload your local git repo to remote, if you set
-// same as: 'git add . && git commit -am 'comment' && git push origin master'
 // your github username and password in ~/.cabinet/cabinet.toml
+// same as: 'git add . && git commit -am 'comment' && git push origin master'
 cabinet git 'just a comment'
 
 // generate a blog template as you wish
