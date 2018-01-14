@@ -6,6 +6,7 @@ extern crate git2;
 use clap::{Arg, App, SubCommand, ArgMatches};
 use colored::*;
 use git2::Repository;
+use std::env;
 
 mod git;
 
@@ -52,16 +53,58 @@ fn main() {
     if matches.is_present("git") {
         println!("using {} module", "git".yellow().bold());
 
-        let _repo = match Repository::open("./") {
+        let mut comment = "[cabinet] just add some files";
+        if let Some(git_matches) = matches.subcommand_matches("git") {
+            if git_matches.is_present("comment") {
+                comment = git_matches.value_of("comment").unwrap();
+                println!("\nyour comment msg: [{}]", comment.yellow().bold());
+            } else {
+                println!("\nno comment, using default: {}", comment.yellow().bold());
+            }
+        }
+
+        let path_buf = env::current_dir().unwrap();
+        let _repo = match Repository::open(&path_buf) {
             Ok(repo) => {
-                println!("{:?}", repo.namespace());
+
+                println!("{}:", "last commit message");
+                let commit = git::find_last_commit(&repo).expect("Couldn't find last commit");
+                git::display_commit(&commit);
+
+                let _add_r = match git::add_and_commit(&repo, &path_buf, &comment) {
+                    Ok(_add_r) => {
+                        println!("new files added.");
+                    },
+                    Err(e) => {
+                        println!("error occurred when adding files: {}", e.to_string().red());
+                    }
+                };
+
+                let _remote = match repo.find_remote("origin") {
+                    Ok(r) => {
+                        let url = r.url().unwrap();
+                        println!("pushing to remote: {}", url.yellow().bold());
+                        let _r = match git::push(&repo, &url) {
+                            Ok(()) => {
+                                println!("Done! pushing succeed!")
+                            },
+                            Err(e) => {
+                                println!("Some error while pushing codes. {}", e.to_string());
+                            }
+                        };
+
+                    },
+                    Err(e) => {
+                        println!("error: {}", e.to_string());
+                        println!("maybe remote not add yet, try {}", "git remote add url".yellow().bold());
+                    }
+                };
             },
             Err(e) => {
                 panic!("failed to open: {}", e)
             },
         };
 
-        git::push_to_remote();
 
     } else if matches.is_present("blog") {
         println!("using {} module", "blog".yellow().bold());
