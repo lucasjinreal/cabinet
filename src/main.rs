@@ -6,9 +6,10 @@ extern crate git2;
 use clap::{Arg, App, SubCommand, ArgMatches};
 use colored::*;
 use git2::Repository;
-use std::env;
+use std::{env, process};
 
 mod git;
+mod blog;
 
 fn parse_args() -> ArgMatches <'static> {
     let matches = App::new("Cabinet")
@@ -29,7 +30,10 @@ fn parse_args() -> ArgMatches <'static> {
             .author("Lucas Jin")
             .arg(Arg::with_name("title")
                 .help("title of blog")
-                .index(1)))
+                .index(1))
+            .arg(Arg::with_name("date")
+                .short("d")
+                .help("using date as prefix or not.")))
 
         .subcommand(SubCommand::with_name("code")
             .about("Generate codes project quickly.")
@@ -46,7 +50,7 @@ fn parse_args() -> ArgMatches <'static> {
 fn main() {
     println!("{} - {}", "Cabinet".yellow().bold(), "The Ultimate Tool Box".yellow().bold());
     println!("written by {} with {}.", "Lucas Jin".green().bold(), "Rust".red().bold());
-    println!("{} welcome folk and star!", "https://github.com/jinfagang/cabinet".green().italic());
+    println!("{} \nwelcome folk and star!", "https://github.com/jinfagang/cabinet");
 
     let matches = parse_args();
 
@@ -108,7 +112,29 @@ fn main() {
 
     } else if matches.is_present("blog") {
         println!("using {} module", "blog".yellow().bold());
+
+        let mut title = "no_title";
+        let mut is_date = false;
+        if let Some(blog_matches) = matches.subcommand_matches("blog") {
+            if blog_matches.is_present("date") {
+                is_date = true;
+            }
+
+            if blog_matches.is_present("title") {
+                title = blog_matches.value_of("title").unwrap();
+            } else {
+                println!("no title provided.");
+                process::exit(1);
+            }
+
+            blog::generate_blog_template(is_date, title);
+        }
+
+
     } else if matches.is_present("code") {
         println!("using {} module", "code".yellow().bold());
+
+
+
     }
 }
