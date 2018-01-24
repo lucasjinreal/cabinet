@@ -16,5 +16,5 @@ elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW64_NT" ]; then
     # Do something under 64 bits Windows NT platform
     echo "this is windows 64bit"
 fi
-
+sudo chmod -R 777 /usr/local/bin/cab
 echo "You just installed cabinet - ultimate tool box!"
