@@ -6,7 +6,8 @@ if [ "$(uname)" = "Darwin" ]; then
     sudo cp bin/cab_macos /usr/local/bin/cab
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
     # Do something under GNU/Linux platform
-    sudo apt install -y libcurl4-openssl-dev
+    sudo apt-get install -y libcurl3
+    #sudo apt install -y libcurl4-openssl-dev
     sudo cp bin/cab_linux /usr/local/bin/cab
 elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform
