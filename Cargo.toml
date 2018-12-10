@@ -1,10 +1,10 @@
 [package]
 name = "cab"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["jinfagang <nicholasjela@gmail.com>"]
 
 [dependencies]
 colored = "1.6.0"
-clap = "2"
+clap = "2.32"
 time = "0.1"
 chrono = "0.4"
