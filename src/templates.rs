@@ -4,7 +4,7 @@ pub fn get_template_by_name(name: &str) -> String{
 
     // define some variables contains template
     let a = "CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -std=c++11
 SRCS = example.cc
 PROG = example
 
