@@ -4,15 +4,22 @@ pub fn get_template_by_name(name: &str) -> String{
 
     // define some variables contains template
     let a = "CC = g++
-CFLAGS = -g -Wall -std=c++11
-SRCS = example.cc
+CFLAGS = -g -Wall
+SRCS = r.cpp
 PROG = example
 
+# based on usage, libaries can be add or remove
 OPENCV = `pkg-config opencv --cflags --libs`
-LIBS = $(OPENCV)
+THOR = -lthor
+PCL = -lpcl_io -lpcl_visualization -lpcl_common -lpcl_features
+# this should got from `locate vtkCommonCore` with various version
+VTK = -I/usr/local/include/vtk -lvtkCommonCore-8.1
+BOOST = -lboost_regex -lboost_system
+LIBS = $(OPENCV) $(THOR) $(PCL) $(VTK) $(BOOST)
 
 $(PROG):$(SRCS)
-	$(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS)";
+	$(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS)
+";
 
 
     let b = r#"cmake_minimum_required(VERSION 3.8)
