@@ -1,1 +1,1 @@
-CMakeLists.txt not found in /media/jintian/53e40f02-ade2-4d49-97c4-93fb0f872981/Netac/weapons/cabinet
+CMakeLists.txt not found in /Volumes/xs/weapons/cabinet
