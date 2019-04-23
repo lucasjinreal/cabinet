@@ -41,12 +41,23 @@ endif()
 add_executable(main main.cpp ${sources})
 target_link_libraries(main ${sources} ${OpenCV_LBS})"#;
 
+    let c = "build/
+cmake-build-debug/
+.vscode/
+.idea/
+checkpoints/
+data/
+*.tar.gz
+    "
+
 
     println!("Obtain template for: {}\n", name);
     if name == "makefile" {
         return a.to_string();
     } else if name == "cmake" {
         return b.to_string();
+    } else if name == "git" {
+        rerturn c.to_string();
     } else {
         return format!("this template: {} is not support for now.", name);
     }

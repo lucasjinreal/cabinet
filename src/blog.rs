@@ -47,7 +47,6 @@ category: 默认分类
     let display = path.display();
     let _file = match File::open(&path) {
         Err(_) => {
-
             let mut _file = match File::create(&path) {
                 Err(why) => panic!("=> couldn't create {}: {}",
                                    display,

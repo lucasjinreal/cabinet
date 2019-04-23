@@ -1,5 +1,7 @@
 extern crate clap;
 extern crate colored;
+#[macro_use]
+extern crate log;
 
 
 use clap::{Arg, App, SubCommand, ArgMatches};
@@ -90,7 +92,7 @@ fn main() {
 
     } else if matches.is_present("code") {
         println!("using {} module", "code".yellow().bold());
-
+        warn!("but this is not implemented yet!")
     } else if matches.is_present("template") {
         println!("using {} module", "template".yellow().bold());
 
@@ -102,7 +104,6 @@ fn main() {
                 let mut temp;
                 temp = templates::get_template_by_name(temp_name);
                 println!("{}", temp);
-
             }
         }
     }
