@@ -1,7 +1,6 @@
 # Cabinet
 
 ![](https://i.loli.net/2018/01/14/5a5b4d6d28d5e.jpeg)
-![](https://i.loli.net/2018/01/14/5a5b4ef2a4fb2.jpeg)
 
 This my cabinet tool box. It implement in *Rust*, and do many helper things for me. Such as:
 
@@ -15,6 +14,7 @@ This my cabinet tool box. It implement in *Rust*, and do many helper things for 
 
 ## Updates
 
+**2019.07.04**: Once picbed cloud ready, cabinet will have a image upload submodule, cabinet global config file should be added for auth, it should created with a certain crypto algorithm;
 **2019.07.03**: I am trying to adding git submodule support for *cabinet*, so that I can simplify daily git push issues.
 
 
