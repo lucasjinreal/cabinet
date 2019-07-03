@@ -10,11 +10,15 @@ This my cabinet tool box. It implement in *Rust*, and do many helper things for 
 - Help me get some pictures which I want;
 - Help me simplified the *git* process, so that not need input every commit message;
 - More things...
-
 **cabinet** is an ultimate tool for me to accelerate my daily work. It's fast written in rust!
 
 
-# Install
+## Updates
+
+**2019.07.03**: I am trying to adding git submodule support for *cabinet*, so that I can simplify daily git push issues.
+
+
+## Install
 
 To install **cabinet**, you should install *rust* first. Then you can build it by:
     
@@ -30,7 +34,7 @@ Or, you can directly using:
 To automatically install built binary carbinet according to your system.
 
 
-# Usage
+## Usage
 
 **cabinet** do many things in my daily work. You can using it like this:
     
@@ -52,7 +56,7 @@ cabinet code -cc 'hello'
 ```
 
 
-# Copyright
+## Copyright
 
 **cabinet** first developed by *Jin Fagang*, All Rights Reserved.
 
