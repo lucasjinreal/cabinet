@@ -47,13 +47,12 @@ category: 默认分类
     let display = path.display();
     let _file = match File::open(&path) {
         Err(_) => {
-
-            let mut file = match File::create(&path) {
+            let mut _file = match File::create(&path) {
                 Err(why) => panic!("=> couldn't create {}: {}",
                                    display,
                                    why.description()),
-                Ok(mut file) => {
-                    match file.write_all(content.as_bytes()) {
+                Ok(mut _file) => {
+                    match _file.write_all(content.as_bytes()) {
                         Err(why) => {
                             panic!("=> couldn't write to {}: {}", display,
                                    why.description().red())
@@ -63,7 +62,7 @@ category: 默认分类
                 },
             };
         },
-        Ok(file) => {
+        Ok(_file) => {
             println!("=> file already exist!")
         },
     };

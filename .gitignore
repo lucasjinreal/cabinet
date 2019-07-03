@@ -1,4 +1,4 @@
 cmake-debug-build/
 /target/
 **/*.rs.bk
-.idea/
+.idea/cmake-build-debug/
