@@ -3,7 +3,7 @@
 pub fn get_template_by_name(name: &str) -> String{
 
     // define some variables contains template
-    let a = "CC = g++
+    let a = r#"CC = g++
 CFLAGS = -g -Wall
 SRCS = r.cpp
 PROG = example
@@ -19,7 +19,7 @@ LIBS = $(OPENCV) $(THOR) $(PCL) $(VTK) $(BOOST)
 
 $(PROG):$(SRCS)
 	$(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS)
-";
+"#;
 
 
     let b = r#"cmake_minimum_required(VERSION 3.8)
@@ -41,23 +41,22 @@ endif()
 add_executable(main main.cpp ${sources})
 target_link_libraries(main ${sources} ${OpenCV_LBS})"#;
 
-    let c = "build/
+    let c = r#"build/
 cmake-build-debug/
 .vscode/
 .idea/
 checkpoints/
 data/
 *.tar.gz
-    "
-
-
+    "#;
+    
     println!("Obtain template for: {}\n", name);
     if name == "makefile" {
         return a.to_string();
     } else if name == "cmake" {
         return b.to_string();
     } else if name == "git" {
-        rerturn c.to_string();
+        return c.to_string();
     } else {
         return format!("this template: {} is not support for now.", name);
     }
