@@ -1,20 +1,15 @@
-extern crate colored;
 extern crate chrono;
+extern crate colored;
 
-
-use colored::*;
 use self::chrono::Local;
+use colored::*;
 
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
-
-
-
 pub fn generate_blog_template(use_date: bool, title: &str) {
-
     let mut save_file_title = str::replace(title, " ", "_").to_string();
 
     let date = Local::now();
@@ -40,7 +35,7 @@ category: 默认分类
 <!-- more -->
 
 # {}
-> This article was original written by Jin Tian, welcome re-post, first come with https://jinfagang.github.io . but please keep this copyright info, thanks, any question could be asked via wechat: `jintianiloveu` ",
+> This article was original written by Jin Tian, you are welcomed to repost, first publish at http://blog.tsuai.cn. Please keep this copyright info, thanks, any question could be asked via wechat: `jintianiloveu` ",
                           title, date_time_str, title, title);
 
     let path = Path::new(&save_file_title);
@@ -48,22 +43,20 @@ category: 默认分类
     let _file = match File::open(&path) {
         Err(_) => {
             let mut _file = match File::create(&path) {
-                Err(why) => panic!("=> couldn't create {}: {}",
-                                   display,
-                                   why.description()),
-                Ok(mut _file) => {
-                    match _file.write_all(content.as_bytes()) {
-                        Err(why) => {
-                            panic!("=> couldn't write to {}: {}", display,
-                                   why.description().red())
-                        },
-                        Ok(_) => println!("=> successfully wrote to {}", display.to_string().yellow().bold()),
-                    }
+                Err(why) => panic!("=> couldn't create {}: {}", display, why.description()),
+                Ok(mut _file) => match _file.write_all(content.as_bytes()) {
+                    Err(why) => panic!(
+                        "=> couldn't write to {}: {}",
+                        display,
+                        why.description().red()
+                    ),
+                    Ok(_) => println!(
+                        "=> successfully wrote to {}",
+                        display.to_string().yellow().bold()
+                    ),
                 },
             };
-        },
-        Ok(_file) => {
-            println!("=> file already exist!")
-        },
+        }
+        Ok(_file) => println!("=> file already exist!"),
     };
 }
