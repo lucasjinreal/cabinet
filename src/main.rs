@@ -13,7 +13,7 @@ mod templates;
 fn parse_args() -> ArgMatches<'static> {
     let matches = App::new("Cabinet")
         .version("1.0.1")
-        .about("ultimate tool box, standby at work.")
+        .about("Swiss army knife for your work.")
         .author("Lucas Jin")
         .subcommand(
             SubCommand::with_name("git")
